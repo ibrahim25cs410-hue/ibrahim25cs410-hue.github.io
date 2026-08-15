@@ -35,9 +35,10 @@ export const LINKS = {
 };
 
 /** Assets the owner drops into /public/assets. Fallbacks handle absence. */
+const assetBase = import.meta.env.BASE_URL;
 export const ASSETS = {
-  certificate: "/assets/nurai-2026-certificate.png",
-  researchPaper: "/assets/intelligent-study-assistant-paper.pdf",
+  certificate: `${assetBase}assets/nurai-2026-certificate.png`,
+  researchPaper: `${assetBase}assets/intelligent-study-assistant-paper.pdf`,
 };
 
 export const TECH_GROUPS = [
