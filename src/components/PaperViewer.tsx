@@ -18,7 +18,7 @@ export function PaperViewer() {
       closeLabel={t.nurai.close}
       size="full"
     >
-      <div className="flex h-[min(92dvh,1080px)] min-h-[70dvh] flex-col">
+      <div className="flex h-[min(94dvh,1200px)] min-h-[72dvh] flex-col">
         <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3 pe-14 sm:px-6">
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-text">
@@ -29,7 +29,7 @@ export function PaperViewer() {
         </div>
 
         <div className="min-h-0 flex-1 overflow-auto bg-[#5c5f64] p-2 sm:p-4">
-          <div className="mx-auto flex w-full max-w-[900px] flex-col gap-3 sm:gap-4">
+          <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-3 sm:gap-5">
             {ASSETS.paperPages.map((src, i) => (
               <figure
                 key={src}
@@ -43,8 +43,8 @@ export function PaperViewer() {
                   <img
                     src={src}
                     alt={`${t.research.paperTitle} — ${i + 1} / ${ASSETS.paperPages.length}`}
-                    width={800}
-                    height={1024}
+                    width={2448}
+                    height={3168}
                     loading={i === 0 ? "eager" : "lazy"}
                     decoding="async"
                     fetchPriority={i === 0 ? "high" : "low"}

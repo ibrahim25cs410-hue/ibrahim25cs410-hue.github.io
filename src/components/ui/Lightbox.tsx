@@ -58,7 +58,7 @@ export function Lightbox({
           <motion.div
             className={`relative z-10 w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl ${
               size === "full"
-                ? "max-h-[94dvh] max-w-6xl"
+                ? "max-h-[96dvh] max-w-7xl"
                 : "max-h-[90vh] max-w-4xl overflow-auto"
             }`}
             initial={{ opacity: 0, scale: 0.94, y: 16 }}
