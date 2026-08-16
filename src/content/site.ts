@@ -39,6 +39,11 @@ const assetBase = import.meta.env.BASE_URL;
 export const ASSETS = {
   certificate: `${assetBase}assets/nurai-2026-certificate.png`,
   researchPaper: `${assetBase}assets/intelligent-study-assistant-paper.pdf`,
+  paperPages: Array.from(
+    { length: 9 },
+    (_, i) =>
+      `${assetBase}assets/paper/page-${String(i + 1).padStart(2, "0")}.png`
+  ),
 };
 
 export const TECH_GROUPS = [
