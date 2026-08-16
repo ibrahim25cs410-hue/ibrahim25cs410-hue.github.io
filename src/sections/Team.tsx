@@ -44,7 +44,7 @@ export function Team() {
                     href={l.href}
                     target={l.href.startsWith("mailto:") ? undefined : "_blank"}
                     rel="noopener noreferrer"
-                    className={`group flex items-center gap-4 rounded-2xl border p-4 transition-all duration-200 ${
+                    className={`group flex min-h-12 items-center gap-4 rounded-2xl border p-4 transition-all duration-200 ${
                       l.primary
                         ? "border-accent/30 bg-accent-soft hover:border-accent"
                         : "border-border bg-surface hover:border-accent/50 hover:-translate-y-0.5"

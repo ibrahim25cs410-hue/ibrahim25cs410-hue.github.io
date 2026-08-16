@@ -10,7 +10,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-surface/40">
-      <div className="mx-auto w-full max-w-[88rem] px-5 py-12 sm:px-8 lg:px-12">
+      <div className="mx-auto w-full max-w-[min(96rem,calc(100%-1.5rem))] px-4 py-10 sm:px-8 lg:px-12 xl:px-16 2xl:max-w-[110rem]">
         <div className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-border-strong bg-surface font-mono-x text-sm font-semibold text-accent">

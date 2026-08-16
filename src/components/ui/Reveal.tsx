@@ -1,5 +1,5 @@
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { usePrefersReducedMotion } from "../../hooks/useMediaQuery";
 
 interface RevealProps {
@@ -7,52 +7,52 @@ interface RevealProps {
   className?: string;
   delay?: number;
   y?: number;
-  as?: "div" | "li" | "section" | "span";
-  once?: boolean;
 }
 
+/**
+ * Scroll reveal that stays visible after the first appearance.
+ * Switching language or theme must not hide the content again.
+ */
 export function Reveal({
   children,
   className,
   delay = 0,
-  y = 22,
-  as = "div",
-  once = true,
+  y = 18,
 }: RevealProps) {
   const reduced = usePrefersReducedMotion();
-  const MotionTag = motion[as];
+  const nodeRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(reduced);
 
-  if (reduced) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
+  useEffect(() => {
+    if (visible) return;
+    const el = nodeRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.06, rootMargin: "0px 0px -6% 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [visible]);
 
   return (
-    <MotionTag
+    <motion.div
+      ref={nodeRef}
       className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={false}
+      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : y }}
+      transition={{
+        duration: reduced ? 0 : 0.55,
+        delay: visible ? delay : 0,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
       {children}
-    </MotionTag>
+    </motion.div>
   );
 }
-
-/** Container + item variants for staggered lists. */
-export const staggerContainer: Variants = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
-  },
-};
-
-export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-  },
-};

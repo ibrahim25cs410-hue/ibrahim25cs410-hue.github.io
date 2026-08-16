@@ -9,9 +9,17 @@ interface LightboxProps {
   label: string;
   closeLabel: string;
   children: ReactNode;
+  size?: "default" | "full";
 }
 
-export function Lightbox({ open, onClose, label, closeLabel, children }: LightboxProps) {
+export function Lightbox({
+  open,
+  onClose,
+  label,
+  closeLabel,
+  children,
+  size = "default",
+}: LightboxProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -33,7 +41,7 @@ export function Lightbox({ open, onClose, label, closeLabel, children }: Lightbo
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-5 lg:p-8"
           role="dialog"
           aria-modal="true"
           aria-label={label}
@@ -48,7 +56,11 @@ export function Lightbox({ open, onClose, label, closeLabel, children }: Lightbo
             aria-hidden
           />
           <motion.div
-            className="relative z-10 max-h-[90vh] w-full max-w-4xl overflow-auto rounded-2xl border border-border bg-surface shadow-2xl"
+            className={`relative z-10 w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl ${
+              size === "full"
+                ? "max-h-[94dvh] max-w-6xl"
+                : "max-h-[90vh] max-w-4xl overflow-auto"
+            }`}
             initial={{ opacity: 0, scale: 0.94, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 8 }}

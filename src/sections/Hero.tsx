@@ -1,39 +1,33 @@
-import { motion, type Variants } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
 import { useLanguage } from "../providers/LanguageProvider";
 import { useT } from "../content/site";
 import { HeroVisual } from "../components/HeroVisual";
 import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
+import { usePaper } from "../providers/PaperProvider";
 
 export function Hero() {
   const { lang } = useLanguage();
   const t = useT(lang);
   const reduced = usePrefersReducedMotion();
+  const { openPaper } = usePaper();
+  const entered = useRef(false);
+
+  useEffect(() => {
+    entered.current = true;
+  }, []);
 
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-  const container: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
-  };
-  const item: Variants = reduced
-    ? {}
-    : {
-        hidden: { opacity: 0, y: 24 },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-        },
-      };
+  const playIntro = !entered.current && !reduced;
 
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-16 sm:pt-32"
+      className="relative flex min-h-[100svh] items-center overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-32"
     >
-      {/* background grid + radial fade */}
       <div className="pointer-events-none absolute inset-0 bg-grid fade-mask-b opacity-70" aria-hidden />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[60vh]"
@@ -44,49 +38,33 @@ export function Hero() {
         aria-hidden
       />
 
-      <div className="relative mx-auto grid w-full max-w-[88rem] grid-cols-1 items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.15fr_1fr] lg:gap-8 lg:px-12">
-        {/* Text */}
-        <motion.div variants={container} initial="hidden" animate="show">
-          <motion.div
-            variants={item}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3.5 py-1.5 text-xs font-medium text-text-soft backdrop-blur"
-          >
-            <Sparkles size={13} className="text-accent" />
-            <span>{t.hero.eyebrow}</span>
-          </motion.div>
+      <div className="relative mx-auto grid w-full max-w-[min(96rem,calc(100%-1.5rem))] grid-cols-1 items-center gap-8 px-4 sm:gap-12 sm:px-8 lg:grid-cols-[1.15fr_1fr] lg:gap-8 lg:px-12 xl:px-16 2xl:max-w-[110rem]">
+        <div>
+          <div className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-[11px] font-medium text-text-soft backdrop-blur sm:mb-6 sm:px-3.5 sm:text-xs">
+            <Sparkles size={13} className="shrink-0 text-accent" />
+            <span className="truncate">{t.hero.eyebrow}</span>
+          </div>
 
-          <motion.h1
-            variants={item}
-            className="text-balance text-4xl leading-[1.05] text-text sm:text-6xl lg:text-7xl"
-          >
+          <h1 className="text-balance text-[clamp(2.1rem,6vw+0.4rem,4.75rem)] leading-[1.08] text-text">
             {t.hero.name}
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            variants={item}
-            className="mt-5 text-xl font-medium text-text sm:text-2xl"
-          >
+          <p className="mt-4 text-[clamp(1.05rem,1.4vw+0.7rem,1.65rem)] font-medium text-text sm:mt-5">
             {t.hero.title}
-          </motion.p>
+          </p>
 
-          <motion.p
-            variants={item}
-            className="mt-2 font-mono-x text-sm tracking-wide text-accent"
-          >
+          <p className="mt-2 font-mono-x text-xs tracking-wide text-accent sm:text-sm">
             {t.hero.positioning}
-          </motion.p>
+          </p>
 
-          <motion.p
-            variants={item}
-            className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted sm:text-lg"
-          >
+          <p className="mt-5 max-w-xl text-pretty text-[0.95rem] leading-relaxed text-muted sm:mt-6 sm:text-lg">
             {t.hero.description}
-          </motion.p>
+          </p>
 
-          <motion.div variants={item} className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap sm:mt-9">
             <button
               onClick={() => scrollTo("projects")}
-              className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-base font-medium text-accent-contrast shadow-[0_8px_28px_-10px_var(--accent)] transition-all duration-200 hover:bg-accent-hover active:scale-[0.98]"
+              className="group relative inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-contrast shadow-[0_8px_28px_-10px_var(--accent)] transition-all duration-200 hover:bg-accent-hover active:scale-[0.98] sm:py-3.5 sm:text-base"
             >
               {t.hero.ctaPrimary}
               <ArrowRight
@@ -95,8 +73,8 @@ export function Hero() {
               />
             </button>
             <button
-              onClick={() => scrollTo("research")}
-              className="group inline-flex items-center justify-center gap-2 rounded-full border border-border-strong bg-surface/70 px-6 py-3.5 text-base font-medium text-text transition-all duration-200 hover:border-accent hover:text-accent active:scale-[0.98]"
+              onClick={openPaper}
+              className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-border-strong bg-surface/70 px-6 py-3 text-sm font-medium text-text transition-all duration-200 hover:border-accent hover:text-accent active:scale-[0.98] sm:py-3.5 sm:text-base"
             >
               {t.hero.ctaSecondary}
               <ArrowUpRight
@@ -104,28 +82,21 @@ export function Hero() {
                 className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
             </button>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        {/* Visual */}
         <motion.div
-          className="flex items-center justify-center lg:justify-end"
-          initial={reduced ? undefined : { opacity: 0, scale: 0.94 }}
-          animate={reduced ? undefined : { opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto flex w-full max-w-[420px] items-center justify-center sm:max-w-[520px] lg:max-w-none lg:justify-end"
+          initial={playIntro ? { opacity: 0, scale: 0.94 } : false}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: reduced ? 0 : 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           <HeroVisual />
         </motion.div>
       </div>
 
-      {/* scroll cue */}
       {!reduced && (
-        <motion.div
-          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-muted sm:flex"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4 }}
-        >
+        <div className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-muted md:flex">
           <span className="font-mono-x text-[10px] uppercase tracking-[0.3em]">
             {t.hero.scroll}
           </span>
@@ -135,7 +106,7 @@ export function Hero() {
             transition={{ duration: 2, repeat: Infinity }}
             style={{ transformOrigin: "top" }}
           />
-        </motion.div>
+        </div>
       )}
     </section>
   );

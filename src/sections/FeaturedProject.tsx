@@ -1,18 +1,15 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight, FileText, Cpu } from "lucide-react";
+import { Cpu, FileText } from "lucide-react";
 import { Section } from "../components/ui/Section";
-import { Reveal, staggerContainer, staggerItem } from "../components/ui/Reveal";
+import { Reveal } from "../components/ui/Reveal";
 import { useLanguage } from "../providers/LanguageProvider";
-import { useT, TECH_GROUPS, ASSETS } from "../content/site";
-import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
+import { useT, TECH_GROUPS } from "../content/site";
 import { Architecture } from "./Architecture";
+import { usePaper } from "../providers/PaperProvider";
 
 export function FeaturedProject() {
   const { lang } = useLanguage();
   const t = useT(lang);
-  const reduced = usePrefersReducedMotion();
-
-  const openPaper = () => window.open(ASSETS.researchPaper, "_blank", "noopener,noreferrer");
+  const { openPaper } = usePaper();
 
   return (
     <Section id="projects">
@@ -29,7 +26,7 @@ export function FeaturedProject() {
 
       {/* Project hero card */}
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-surface/60 p-6 card-shadow sm:p-10 lg:p-14">
+        <div className="relative overflow-hidden rounded-2xl border border-border bg-surface/60 p-5 card-shadow sm:rounded-3xl sm:p-10 lg:p-14">
           <div className="pointer-events-none absolute inset-0 bg-dots opacity-40" aria-hidden />
           <div
             className="pointer-events-none absolute -end-24 -top-24 h-72 w-72 rounded-full opacity-50 blur-3xl"
@@ -43,7 +40,7 @@ export function FeaturedProject() {
                 <Cpu size={12} />
                 {t.project.tag}
               </span>
-              <h2 className="mt-5 text-3xl text-text sm:text-4xl lg:text-5xl">
+              <h2 className="mt-5 text-[clamp(1.6rem,2.5vw+0.7rem,3rem)] text-text">
                 {t.project.title}
               </h2>
               <div className="mt-6 space-y-4 text-text-soft">
@@ -54,14 +51,10 @@ export function FeaturedProject() {
 
               <button
                 onClick={openPaper}
-                className="group mt-8 inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface px-5 py-3 text-sm font-medium text-text transition-colors hover:border-accent hover:text-accent"
+                className="group mt-8 inline-flex min-h-11 items-center gap-2 rounded-full border border-border-strong bg-surface px-5 py-3 text-sm font-medium text-text transition-colors hover:border-accent hover:text-accent"
               >
                 <FileText size={16} />
                 {t.research.cta}
-                <ArrowUpRight
-                  size={15}
-                  className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
               </button>
             </div>
 
@@ -76,23 +69,16 @@ export function FeaturedProject() {
                     <p className="mb-2.5 text-xs font-semibold text-text-soft">
                       {t.project.techGroups[group.key]}
                     </p>
-                    <motion.ul
-                      className="flex flex-wrap gap-2"
-                      variants={reduced ? undefined : staggerContainer}
-                      initial={reduced ? undefined : "hidden"}
-                      whileInView={reduced ? undefined : "show"}
-                      viewport={{ once: true }}
-                    >
+                    <ul className="flex flex-wrap gap-2">
                       {group.items.map((item) => (
-                        <motion.li
+                        <li
                           key={item}
-                          variants={reduced ? undefined : staggerItem}
                           className="rounded-lg border border-border bg-bg-elev px-2.5 py-1.5 font-mono-x text-xs text-text-soft transition-colors hover:border-accent hover:text-accent"
                         >
                           {item}
-                        </motion.li>
+                        </li>
                       ))}
-                    </motion.ul>
+                    </ul>
                   </div>
                 ))}
               </div>

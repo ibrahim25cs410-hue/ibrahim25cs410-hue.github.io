@@ -137,6 +137,9 @@ interface Content {
     stats: Record<string, string>;
     cta: string;
     ctaMissing: string;
+    paperLoading: string;
+    paperError: string;
+    paperTitle: string;
   };
   nurai: {
     label: string;
@@ -256,7 +259,7 @@ const en: Content = {
     },
     archLabel: "Architecture",
     archTitle: "The Retrieval-Augmented Pipeline",
-    archHint: "Hover a stage to learn more",
+    archHint: "Tap or hover a stage to learn more",
     steps: [
       {
         title: "Educational Materials",
@@ -309,6 +312,9 @@ const en: Content = {
     },
     cta: "View Research Paper",
     ctaMissing: "Research paper — coming soon",
+    paperLoading: "Opening the research paper…",
+    paperError: "The paper could not be displayed. Please try again.",
+    paperTitle: "Research paper",
   },
   nurai: {
     label: "Achievement",
@@ -443,7 +449,7 @@ const ar: Content = {
     },
     archLabel: "المعمارية",
     archTitle: "منظومة التوليد المعزّز بالاسترجاع",
-    archHint: "مرّر فوق أي مرحلة لمعرفة المزيد",
+    archHint: "اضغط أو مرّر فوق أي مرحلة لمعرفة المزيد",
     steps: [
       {
         title: "المواد التعليمية",
@@ -496,6 +502,9 @@ const ar: Content = {
     },
     cta: "عرض ورقة البحث",
     ctaMissing: "ورقة البحث — قريبًا",
+    paperLoading: "جاري فتح ورقة البحث…",
+    paperError: "تعذر عرض الورقة. حاول مرة أخرى.",
+    paperTitle: "ورقة البحث",
   },
   nurai: {
     label: "إنجاز",

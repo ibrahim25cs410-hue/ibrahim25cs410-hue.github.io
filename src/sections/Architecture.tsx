@@ -33,7 +33,7 @@ export function Architecture() {
           const isActive = active === i;
           const isLast = i === steps.length - 1;
           return (
-            <li key={step.title} className="relative ps-8 sm:ps-10">
+            <li key={`arch-${i}`} className="relative ps-8 sm:ps-10">
               {/* node */}
               <motion.span
                 className={`absolute -start-[7px] top-3 z-10 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 transition-colors duration-300 ${
@@ -41,10 +41,8 @@ export function Architecture() {
                     ? "border-accent bg-accent"
                     : "border-border-strong bg-surface"
                 }`}
-                initial={reduced ? undefined : { scale: 0 }}
-                whileInView={reduced ? undefined : { scale: 1 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: i * 0.05, type: "spring", stiffness: 320, damping: 20 }}
+                initial={false}
+                animate={{ scale: 1 }}
               />
 
               {/* traveling pulse */}
@@ -63,16 +61,12 @@ export function Architecture() {
                 />
               )}
 
-              <motion.button
+              <button
                 type="button"
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 onMouseLeave={() => setActive(null)}
                 onClick={() => setActive(isActive ? null : i)}
-                initial={reduced ? undefined : { opacity: 0, x: 12 }}
-                whileInView={reduced ? undefined : { opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: i * 0.05, duration: 0.5 }}
                 className={`group mb-2 block w-full rounded-xl border p-4 text-start transition-all duration-300 ${
                   isActive
                     ? "border-accent bg-accent-soft"
@@ -104,7 +98,7 @@ export function Architecture() {
                 >
                   {step.desc}
                 </motion.p>
-              </motion.button>
+              </button>
             </li>
           );
         })}

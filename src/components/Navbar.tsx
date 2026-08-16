@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "../providers/ThemeProvider";
@@ -14,6 +14,10 @@ export function Navbar() {
   const active = useScrollSpy(NAV_IDS);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [lang]);
+
   const go = (id: string) => {
     setOpen(false);
     const el = document.getElementById(id);
@@ -28,7 +32,7 @@ export function Navbar() {
           : "border-b border-transparent py-4"
       }`}
     >
-      <nav className="mx-auto flex w-full max-w-[88rem] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
+      <nav className="mx-auto flex w-full max-w-[min(96rem,calc(100%-1.5rem))] items-center justify-between gap-3 px-4 sm:px-8 lg:px-12 xl:px-16 2xl:max-w-[110rem]">
         {/* Brand */}
         <button
           onClick={() => go("home")}
@@ -44,12 +48,12 @@ export function Navbar() {
         </button>
 
         {/* Desktop nav */}
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-0.5 xl:flex">
           {NAV_IDS.map((id) => (
             <li key={id}>
               <button
                 onClick={() => go(id)}
-                className={`relative rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                className={`relative rounded-md px-2.5 py-2 text-sm font-medium transition-colors xl:px-3 ${
                   active === id
                     ? "text-text"
                     : "text-muted hover:text-text"
@@ -57,11 +61,7 @@ export function Navbar() {
               >
                 {t.nav[id]}
                 {active === id && (
-                  <motion.span
-                    layoutId="nav-active"
-                    className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-accent"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
+                  <span className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-accent" />
                 )}
               </button>
             </li>
@@ -95,7 +95,7 @@ export function Navbar() {
 
           <button
             onClick={toggleTheme}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface/60 text-text transition-colors hover:border-accent hover:text-accent"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface/60 text-text transition-colors hover:border-accent hover:text-accent"
             aria-label={t.a11y.toggleTheme}
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -113,7 +113,7 @@ export function Navbar() {
 
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface/60 text-text transition-colors hover:border-accent lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface/60 text-text transition-colors hover:border-accent xl:hidden"
             aria-label={open ? t.a11y.closeMenu : t.a11y.openMenu}
             aria-expanded={open}
           >
@@ -131,9 +131,9 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="glass overflow-hidden border-b border-border lg:hidden"
+            className="glass overflow-hidden border-b border-border xl:hidden"
           >
-            <ul className="mx-auto flex w-full max-w-[88rem] flex-col gap-1 px-5 py-4 sm:px-8">
+            <ul className="mx-auto flex w-full max-w-[88rem] flex-col gap-1 px-4 py-4 sm:px-8">
               {NAV_IDS.map((id, i) => (
                 <motion.li
                   key={id}

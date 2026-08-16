@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App.tsx";
 import { ThemeProvider } from "./providers/ThemeProvider.tsx";
 import { LanguageProvider } from "./providers/LanguageProvider.tsx";
+import { PaperProvider } from "./providers/PaperProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
       <LanguageProvider>
-        <App />
+        <PaperProvider>
+          <App />
+        </PaperProvider>
       </LanguageProvider>
     </ThemeProvider>
   </StrictMode>

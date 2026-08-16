@@ -14,6 +14,7 @@ import { Contact } from "./sections/Contact";
 import { Footer } from "./sections/Footer";
 import { useLanguage } from "./providers/LanguageProvider";
 import { useT } from "./content/site";
+import { PaperViewer } from "./components/PaperViewer";
 
 export default function App() {
   const { lang } = useLanguage();
@@ -52,6 +53,7 @@ export default function App() {
       </main>
 
       <Footer />
+      <PaperViewer />
     </>
   );
 }

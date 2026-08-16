@@ -94,6 +94,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -111,7 +112,9 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     transition: background-color 0.5s ease, color 0.4s ease;
-    overflow-x: hidden;
+    overflow-x: clip;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   h1, h2, h3, h4, h5 {
@@ -139,6 +142,14 @@
     outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 4px;
+  }
+
+  img, svg, video, canvas, iframe, object {
+    max-width: 100%;
+  }
+
+  button, a, [role="button"] {
+    touch-action: manipulation;
   }
 
   /* Scrollbar */
@@ -217,19 +228,14 @@
   }
 }
 
-/* Smooth, scoped theme switch (added briefly on user toggle) */
+/* Smooth theme switch — only colors, never opacity/transform (those hide content). */
 @media (prefers-reduced-motion: no-preference) {
   .theme-transition,
-  .theme-transition *,
-  .theme-transition *::before,
-  .theme-transition *::after {
+  .theme-transition body {
     transition:
       background-color 0.42s ease,
-      border-color 0.42s ease,
       color 0.42s ease,
-      fill 0.42s ease,
-      stroke 0.42s ease !important;
-    transition-delay: 0s !important;
+      border-color 0.42s ease !important;
   }
 }
 
@@ -277,5 +283,17 @@
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* Larger type on TVs / 4K displays */
+@media (min-width: 1920px) {
+  html {
+    font-size: 17.5px;
+  }
+}
+@media (min-width: 2560px) {
+  html {
+    font-size: 19.5px;
   }
 }

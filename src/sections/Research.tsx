@@ -1,13 +1,15 @@
-import { FileText, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { FileText, ShieldCheck } from "lucide-react";
 import { Section, SectionHeading } from "../components/ui/Section";
 import { Reveal } from "../components/ui/Reveal";
 import { StatCounter } from "../components/ui/StatCounter";
 import { useLanguage } from "../providers/LanguageProvider";
-import { useT, RESEARCH_STATS, ASSETS } from "../content/site";
+import { useT, RESEARCH_STATS } from "../content/site";
+import { usePaper } from "../providers/PaperProvider";
 
 export function Research() {
   const { lang } = useLanguage();
   const t = useT(lang);
+  const { openPaper } = usePaper();
 
   return (
     <Section id="research" className="bg-surface/30">
@@ -27,34 +29,28 @@ export function Research() {
           <p className="mt-6 text-pretty text-lg leading-relaxed text-text-soft">
             {t.research.body}
           </p>
-          <a
-            href={ASSETS.researchPaper}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-medium text-accent-contrast shadow-[0_8px_28px_-10px_var(--accent)] transition-all hover:bg-accent-hover active:scale-[0.98]"
+          <button
+            onClick={openPaper}
+            className="group mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-medium text-accent-contrast shadow-[0_8px_28px_-10px_var(--accent)] transition-all hover:bg-accent-hover active:scale-[0.98]"
           >
             <FileText size={16} />
             {t.research.cta}
-            <ArrowUpRight
-              size={15}
-              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </a>
+          </button>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {RESEARCH_STATS.map((s) => (
               <div
                 key={s.key}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/50 card-shadow"
+                className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-accent/50 card-shadow sm:p-6"
               >
                 <div
                   className="pointer-events-none absolute -end-8 -top-8 h-20 w-20 rounded-full opacity-0 blur-2xl transition-opacity group-hover:opacity-100"
                   style={{ background: "var(--accent-soft)" }}
                   aria-hidden
                 />
-                <p className="font-mono-x text-3xl font-semibold text-text sm:text-4xl">
+                <p className="font-mono-x text-[clamp(1.5rem,2vw+0.8rem,2.25rem)] font-semibold text-text">
                   <StatCounter value={s.value} suffix={s.suffix} />
                 </p>
                 <p className="mt-2 text-sm text-muted">

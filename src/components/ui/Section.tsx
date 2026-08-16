@@ -11,9 +11,9 @@ export function Section({ id, children, className = "" }: SectionProps) {
   return (
     <section
       id={id}
-      className={`relative scroll-mt-24 py-20 sm:py-28 lg:py-32 ${className}`}
+      className={`relative scroll-mt-24 py-16 sm:py-24 lg:py-28 xl:py-32 2xl:py-36 ${className}`}
     >
-      <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto w-full max-w-[min(96rem,calc(100%-1.5rem))] px-4 sm:px-8 lg:px-12 xl:px-16 2xl:max-w-[110rem]">
         {children}
       </div>
     </section>
@@ -50,7 +50,7 @@ export function SectionHeading({
           {label}
         </span>
       </div>
-      <h2 className="max-w-3xl text-3xl text-text sm:text-4xl lg:text-5xl">
+      <h2 className="max-w-3xl text-[clamp(1.6rem,2.4vw+0.8rem,3.25rem)] text-text">
         {title}
       </h2>
       {subtitle && (
