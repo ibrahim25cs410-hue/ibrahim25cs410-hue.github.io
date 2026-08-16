@@ -29,7 +29,7 @@ export function PaperViewer() {
         </div>
 
         <div className="min-h-0 flex-1 overflow-auto bg-[#5c5f64] p-2 sm:p-4">
-          <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 sm:gap-4">
+          <div className="mx-auto flex w-full max-w-[900px] flex-col gap-3 sm:gap-4">
             {ASSETS.paperPages.map((src, i) => (
               <figure
                 key={src}
@@ -43,8 +43,8 @@ export function PaperViewer() {
                   <img
                     src={src}
                     alt={`${t.research.paperTitle} — ${i + 1} / ${ASSETS.paperPages.length}`}
-                    width={1836}
-                    height={2376}
+                    width={800}
+                    height={1024}
                     loading={i === 0 ? "eager" : "lazy"}
                     decoding="async"
                     fetchPriority={i === 0 ? "high" : "low"}

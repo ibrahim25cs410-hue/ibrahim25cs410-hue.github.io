@@ -42,7 +42,7 @@ export const ASSETS = {
   paperPages: Array.from(
     { length: 9 },
     (_, i) =>
-      `${assetBase}assets/paper/page-${String(i + 1).padStart(2, "0")}.png`
+      `${assetBase}assets/paper/page-${String(i + 1).padStart(2, "0")}.png?v=3`
   ),
 };
 
