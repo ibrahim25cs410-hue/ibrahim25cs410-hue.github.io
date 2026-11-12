@@ -12,11 +12,11 @@ export function FeaturedProject() {
   const { openPaper } = usePaper();
 
   return (
-    <Section id="projects">
+    <Section id="isa-details">
       {/* header */}
       <Reveal className="mb-10 flex flex-col gap-4 sm:mb-14">
         <div className="flex items-center gap-3 text-muted">
-          <span className="font-mono-x text-xs tracking-widest text-accent">02</span>
+          <span className="font-mono-x text-xs tracking-widest text-accent">05</span>
           <span className="h-px w-8 bg-border-strong" />
           <span className="font-mono-x text-xs uppercase tracking-[0.2em]">
             {t.project.label}

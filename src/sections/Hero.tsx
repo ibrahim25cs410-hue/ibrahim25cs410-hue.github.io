@@ -45,7 +45,7 @@ export function Hero() {
             <span className="truncate">{t.hero.eyebrow}</span>
           </div>
 
-          <h1 className="text-balance text-[clamp(2.1rem,6vw+0.4rem,4.75rem)] leading-[1.08] text-text">
+          <h1 className="text-shimmer text-balance text-[clamp(2.1rem,6vw+0.4rem,4.75rem)] leading-[1.08]">
             {t.hero.name}
           </h1>
 

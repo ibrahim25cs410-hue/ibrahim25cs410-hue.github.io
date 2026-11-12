@@ -5,6 +5,9 @@ import { ScrollProgress } from "./components/ScrollProgress";
 import { Hero } from "./sections/Hero";
 import { Credibility } from "./sections/Credibility";
 import { About } from "./sections/About";
+import { Skills } from "./sections/Skills";
+import { Education } from "./sections/Education";
+import { Projects } from "./sections/Projects";
 import { FeaturedProject } from "./sections/FeaturedProject";
 import { Research } from "./sections/Research";
 import { Nurai } from "./sections/Nurai";
@@ -22,6 +25,15 @@ export default function App() {
 
   useEffect(() => {
     document.title = t.meta.title;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.querySelector('meta[name="description"]')?.setAttribute(
+      "content",
+      lang === "ar"
+        ? "الموقع الشخصي لابراهيم الحيالي، طالب ذكاء اصطناعي ومطور في جامعة الموصل."
+        : "Personal portfolio of Ibrahem Alhayaly, AI student and developer at the University of Mosul."
+    );
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", t.meta.title);
     document
       .querySelector('meta[property="og:locale"]')
       ?.setAttribute("content", lang === "ar" ? "ar_AR" : "en_US");
@@ -44,6 +56,9 @@ export default function App() {
         <Hero />
         <Credibility />
         <About />
+        <Skills />
+        <Education />
+        <Projects />
         <FeaturedProject />
         <Research />
         <Nurai />

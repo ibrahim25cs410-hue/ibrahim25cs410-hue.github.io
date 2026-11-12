@@ -47,7 +47,7 @@ export function Nurai() {
   return (
     <Section id="nurai-achievement">
       <SectionHeading
-        index="04"
+        index="07"
         label={t.nurai.label}
         title={t.nurai.title}
         subtitle={t.nurai.subtitle}

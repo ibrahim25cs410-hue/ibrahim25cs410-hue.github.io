@@ -7,6 +7,8 @@ import type { Lang } from "../providers/LanguageProvider";
 export const NAV_IDS = [
   "home",
   "about",
+  "skills",
+  "education",
   "projects",
   "research",
   "achievements",
@@ -22,6 +24,7 @@ export const LINKS = {
     instagramHandle: "@alhayaly.2007",
     facebook: "https://www.facebook.com/share/185j2Wxb9f/",
     email: "ibrahempapeer@gmail.com",
+    linkedin: "https://www.linkedin.com/in/ibrahem-al-hayaly-33aa0840a/",
   },
   team: {
     instagram: "https://www.instagram.com/ftr.ai_26",
@@ -38,6 +41,7 @@ export const LINKS = {
 const assetBase = import.meta.env.BASE_URL;
 export const ASSETS = {
   certificate: `${assetBase}assets/nurai-2026-certificate.png`,
+  ijazah: `${assetBase}assets/quran-ijazah-asim.jpg`,
   researchPaper: `${assetBase}assets/intelligent-study-assistant-paper.pdf`,
   paperPages: Array.from(
     { length: 9 },
@@ -64,6 +68,69 @@ export const TECH_GROUPS = [
     items: ["RAG", "FAISS", "LlamaIndex", "nomic-embed-text"],
   },
 ] as const;
+
+
+export const CORE_SKILLS = [
+  "Python",
+  "C++",
+  "Java",
+  "HTML / CSS",
+  "Git / GitHub",
+  "Data Structures & Algorithms",
+  "SQL",
+] as const;
+
+export const EDUCATION = {
+  en: {
+    institution: "University of Mosul",
+    college: "College of Computer Science and Mathematics",
+    department: "Department of Artificial Intelligence",
+  },
+  ar: {
+    institution: "جامعة الموصل",
+    college: "كلية علوم الحاسوب والرياضيات",
+    department: "قسم الذكاء الاصطناعي",
+  },
+} as const;
+
+export const PROJECT_CARDS = {
+  en: {
+    label: "Selected Work",
+    title: "Projects",
+    aura: {
+      name: "Aura Gold AI",
+      status: "Under Development",
+      role: "Project Leader",
+      description: "An AI-powered platform focused on gold price analysis and prediction.",
+      action: "Visit Project",
+    },
+    assistant: {
+      name: "Smart University Assistant",
+      status: "Completed",
+      role: "Project Leader",
+      description: "An intelligent academic assistant designed to help university students access and understand their study materials.",
+      action: "Visit Project",
+    },
+  },
+  ar: {
+    label: "أعمال مختارة",
+    title: "المشاريع",
+    aura: {
+      name: "Aura Gold AI",
+      status: "قيد التطوير",
+      role: "قائد المشروع",
+      description: "منصة تعتمد على الذكاء الاصطناعي لتحليل أسعار الذهب والتنبؤ بها.",
+      action: "زيارة المشروع",
+    },
+    assistant: {
+      name: "المساعد الجامعي الذكي",
+      status: "مكتمل",
+      role: "قائد المشروع",
+      description: "مساعد أكاديمي ذكي يهدف إلى مساعدة طلبة الجامعة في الوصول إلى موادهم الدراسية وفهمها.",
+      action: "زيارة المشروع",
+    },
+  },
+} as const;
 
 export const RESEARCH_STATS = [
   { value: 114, suffix: "", key: "questions" },
@@ -119,6 +186,8 @@ interface Content {
     focusTitle: string;
     focus: string[];
   };
+  skills: { label: string; title: string; subtitle: string };
+  education: { label: string; title: string; university: string; college: string; department: string };
   project: {
     label: string;
     tag: string;
@@ -185,6 +254,7 @@ interface Content {
     instagram: string;
     email: string;
     socialTitle: string;
+    linkedin: string;
   };
   footer: {
     role: string;
@@ -199,13 +269,15 @@ const en: Content = {
   nav: {
     home: "Home",
     about: "About",
+    skills: "Skills",
+    education: "Education",
     projects: "Projects",
     research: "Research",
     achievements: "Achievements",
     team: "Team",
     contact: "Contact",
   },
-  meta: { title: "Ibrahim Al-Hayali | AI Student, Developer & Researcher" },
+  meta: { title: "Ibrahem Alhayaly | AI Student & Developer" },
   a11y: {
     toggleTheme: "Toggle color theme",
     toggleLang: "Switch language",
@@ -216,8 +288,8 @@ const en: Content = {
   },
   hero: {
     eyebrow: "AI Student · Developer · Researcher",
-    name: "Ibrahim Al-Hayali",
-    title: "Artificial Intelligence Student",
+    name: "Ibrahem Alhayaly",
+    title: "AI Student & Developer",
     positioning: "Developer · Researcher · Builder",
     description:
       "I build AI-powered systems and turn technical ideas into practical, research-driven solutions.",
@@ -236,7 +308,7 @@ const en: Content = {
   about: {
     label: "About",
     title: "About Me",
-    body: "Ibrahim Al-Hayali is an Artificial Intelligence student at the University of Mosul with a strong interest in AI systems, software development, research, and building practical technology solutions.",
+    body: "Ibrahem Alhayaly is an AI student at the University of Mosul with a strong interest in AI systems, software development, research, and building practical technology solutions.",
     focusTitle: "Focus areas",
     focus: [
       "Artificial Intelligence",
@@ -247,6 +319,8 @@ const en: Content = {
       "Local AI Systems",
     ],
   },
+  skills: { label: "Capabilities", title: "Technical Skills", subtitle: "Tools and foundations I work with." },
+  education: { label: "Academic Background", title: "Education", university: "University of Mosul", college: "College of Computer Science and Mathematics", department: "Department of Artificial Intelligence" },
   project: {
     label: "Featured Project",
     tag: "AI · Education · Research",
@@ -322,18 +396,18 @@ const en: Content = {
     paperTitle: "Research paper",
   },
   nurai: {
-    label: "Achievement",
+    label: "Championship",
     title: "NURAI 2026",
     subtitle:
-      "National University Journal of Robotics and Artificial Intelligence",
+      "National Robotics & AI Applications Championship",
     team: "Future AI Team — University of Mosul",
     trackLabel: "Track",
     track: "Education & Training",
     projectLabel: "Project",
     project: "Intelligent Study Assistant",
-    recognitionLabel: "Recognition",
-    recognition: "Good",
-    body: "Ibrahim participated as a member of the Future AI Team and contributed to the Intelligent Study Assistant project.",
+    recognitionLabel: "Participation",
+    recognition: "Participant",
+    body: "Ibrahem participated as a member of the Future AI Team and contributed to the Intelligent Study Assistant project.",
     view: "View certificate",
     dateLabel: "Date",
     idLabel: "Certificate ID",
@@ -375,10 +449,11 @@ const en: Content = {
     instagram: "Instagram",
     email: "Email",
     socialTitle: "Elsewhere",
+    linkedin: "LinkedIn",
   },
   footer: {
     role: "Artificial Intelligence Student · Developer · Researcher",
-    copyright: "© 2026 Ibrahim Al-Hayali",
+    copyright: "© 2026 Ibrahem Alhayaly",
     built: "Designed & built with care.",
   },
 };
@@ -389,13 +464,15 @@ const ar: Content = {
   nav: {
     home: "الرئيسية",
     about: "نبذة",
+    skills: "المهارات",
+    education: "التعليم",
     projects: "المشاريع",
     research: "البحث",
     achievements: "الإنجازات",
     team: "الفريق",
     contact: "تواصل",
   },
-  meta: { title: "إبراهيم الحيالي | طالب ذكاء اصطناعي ومطور وباحث" },
+  meta: { title: "ابراهيم الحيالي | طالب ذكاء اصطناعي ومطور" },
   a11y: {
     toggleTheme: "تبديل المظهر",
     toggleLang: "تغيير اللغة",
@@ -406,8 +483,8 @@ const ar: Content = {
   },
   hero: {
     eyebrow: "طالب ذكاء اصطناعي · مطور · باحث",
-    name: "إبراهيم الحيالي",
-    title: "طالب ذكاء اصطناعي",
+    name: "ابراهيم الحيالي",
+    title: "طالب ذكاء اصطناعي ومطور",
     positioning: "مطور · باحث · صانع حلول",
     description:
       "أبني أنظمة تعتمد على الذكاء الاصطناعي، وأحوّل الأفكار التقنية إلى حلول عملية قائمة على البحث والتجربة.",
@@ -426,7 +503,7 @@ const ar: Content = {
   about: {
     label: "نبذة",
     title: "نبذة عني",
-    body: "إبراهيم الحيالي طالب في مجال الذكاء الاصطناعي بجامعة الموصل، مهتم بتطوير أنظمة الذكاء الاصطناعي والبرمجيات والبحث العلمي وبناء حلول تقنية عملية.",
+    body: "ابراهيم الحيالي طالب في قسم الذكاء الاصطناعي بجامعة الموصل، مهتم بتطوير أنظمة الذكاء الاصطناعي والبرمجيات والبحث العلمي وبناء حلول تقنية عملية.",
     focusTitle: "مجالات التركيز",
     focus: [
       "الذكاء الاصطناعي",
@@ -437,6 +514,8 @@ const ar: Content = {
       "أنظمة الذكاء الاصطناعي المحلية",
     ],
   },
+  skills: { label: "المهارات", title: "المهارات التقنية", subtitle: "الأدوات والأساسيات التقنية التي أعمل بها." },
+  education: { label: "الخلفية الأكاديمية", title: "التعليم", university: "جامعة الموصل", college: "كلية علوم الحاسوب والرياضيات", department: "قسم الذكاء الاصطناعي" },
   project: {
     label: "المشروع المميز",
     tag: "ذكاء اصطناعي · تعليم · بحث",
@@ -512,17 +591,17 @@ const ar: Content = {
     paperTitle: "ورقة البحث",
   },
   nurai: {
-    label: "إنجاز",
+    label: "بطولة",
     title: "NURAI 2026",
-    subtitle: "المجلة الوطنية الجامعية للروبوتات والذكاء الاصطناعي",
+    subtitle: "بطولة التطبيقات الوطنية للروبوتات والذكاء الاصطناعي",
     team: "فريق Future AI — جامعة الموصل",
     trackLabel: "المسار",
     track: "التعليم والتدريب",
     projectLabel: "المشروع",
     project: "المساعد الدراسي الذكي",
-    recognitionLabel: "التقدير",
-    recognition: "جيد",
-    body: "شارك إبراهيم كعضو في فريق Future AI وساهم في مشروع المساعد الدراسي الذكي.",
+    recognitionLabel: "المشاركة",
+    recognition: "مشارك",
+    body: "شارك ابراهيم كعضو في فريق Future AI وساهم في مشروع المساعد الدراسي الذكي.",
     view: "عرض الشهادة",
     dateLabel: "التاريخ",
     idLabel: "معرّف الشهادة",
@@ -563,10 +642,11 @@ const ar: Content = {
     instagram: "إنستغرام",
     email: "البريد الإلكتروني",
     socialTitle: "روابط أخرى",
+    linkedin: "لينكدإن",
   },
   footer: {
     role: "طالب ذكاء اصطناعي · مطور · باحث",
-    copyright: "© 2026 إبراهيم الحيالي",
+    copyright: "© 2026 ابراهيم الحيالي",
     built: "صُمّم وبُني بعناية.",
   },
 };

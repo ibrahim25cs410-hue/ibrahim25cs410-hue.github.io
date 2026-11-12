@@ -45,12 +45,12 @@ export function SectionHeading({
         <span className="font-mono-x text-xs tracking-widest text-accent">
           {index}
         </span>
-        <span className="h-px w-8 bg-border-strong" />
+        <span className="line-shimmer h-px w-8 bg-border-strong" />
         <span className="font-mono-x text-xs uppercase tracking-[0.2em]">
           {label}
         </span>
       </div>
-      <h2 className="max-w-3xl text-[clamp(1.6rem,2.4vw+0.8rem,3.25rem)] text-text">
+      <h2 className="text-shimmer max-w-3xl text-[clamp(1.6rem,2.4vw+0.8rem,3.25rem)]">
         {title}
       </h2>
       {subtitle && (

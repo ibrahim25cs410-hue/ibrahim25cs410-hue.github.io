@@ -1,4 +1,4 @@
-import { Instagram, Mail, Facebook, ArrowUpRight } from "lucide-react";
+import { Instagram, Mail, Facebook, ArrowUpRight, Linkedin } from "lucide-react";
 import { Section } from "../components/ui/Section";
 import { Reveal } from "../components/ui/Reveal";
 import { useLanguage } from "../providers/LanguageProvider";
@@ -11,6 +11,7 @@ export function Contact() {
   const socials = [
     { icon: Instagram, label: LINKS.personal.instagramHandle, href: LINKS.personal.instagram },
     { icon: Facebook, label: "Facebook", href: LINKS.personal.facebook },
+    { icon: Linkedin, label: t.contact.linkedin, href: LINKS.personal.linkedin },
     { icon: Mail, label: LINKS.personal.email, href: `mailto:${LINKS.personal.email}` },
   ];
 

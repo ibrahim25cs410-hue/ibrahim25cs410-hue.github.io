@@ -25,10 +25,8 @@ function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "dark";
   const stored = window.localStorage.getItem(STORAGE_KEY);
   if (stored === "dark" || stored === "light") return stored;
-  // Respect prefers-color-scheme on first visit.
-  return window.matchMedia("(prefers-color-scheme: light)").matches
-    ? "light"
-    : "dark";
+  // The portfolio identity defaults to its Dark Navy theme.
+  return "dark";
 }
 
 function applyTheme(theme: Theme) {

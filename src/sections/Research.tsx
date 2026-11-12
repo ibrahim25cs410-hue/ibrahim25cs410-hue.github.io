@@ -14,7 +14,7 @@ export function Research() {
   return (
     <Section id="research" className="bg-surface/30">
       <SectionHeading
-        index="03"
+        index="06"
         label={t.research.label}
         title={t.research.title}
         subtitle={t.research.subtitle}
