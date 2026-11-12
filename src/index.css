@@ -22,6 +22,7 @@
 
   --font-sans: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: "IBM Plex Sans Arabic", "Cairo", ui-sans-serif, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -45,8 +46,8 @@
 }
 
 :root[dir="rtl"] {
-  --font-sans: "IBM Plex Sans Arabic", "Space Grotesk", ui-sans-serif, sans-serif;
-  --font-body: "IBM Plex Sans Arabic", "Inter", ui-sans-serif, sans-serif;
+  --font-sans: var(--font-arabic);
+  --font-body: var(--font-arabic);
 }
 
 @theme inline {
@@ -101,7 +102,8 @@
     font-family: var(--font-sans);
     font-weight: 600;
     letter-spacing: -0.03em;
-    line-height: 1.1;
+    line-height: 1.15;
+    overflow: visible;
   }
 
   :root[dir="rtl"] h1,
@@ -110,7 +112,8 @@
   :root[dir="rtl"] h4,
   :root[dir="rtl"] h5 {
     letter-spacing: 0;
-    line-height: 1.35;
+    line-height: 1.45;
+    padding-block: 0.08em 0.14em;
   }
 
   ::selection {
@@ -167,6 +170,11 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: text-shimmer 5.5s ease-in-out infinite;
+  }
+
+  :root[dir="rtl"] .text-shimmer {
+    line-height: 1.45;
+    padding-block: 0.08em 0.14em;
   }
 
   .line-shimmer {
